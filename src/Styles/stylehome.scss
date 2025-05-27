@@ -1,0 +1,93 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+
+  body {
+    font-family: "Rubik", sans-serif;
+  }
+}
+$light: #ffffff;
+$gray: rgb(219, 219, 219);
+
+.flex {
+  display: flex;
+} 
+
+.sidebar {
+  width: 14rem;
+  height: 100vh; /* Abarca toda la pantalla vertical */
+  border-right: 1px solid $gray;
+  background-color: $light;
+  position: fixed; /* Fija la posición del sidebar */
+  top: 0; /* Lo coloca en la parte superior */
+  ul {
+    list-style: none;
+    padding: 2rem 2rem;
+  }
+  li {
+    margin-bottom: 1rem;
+  }
+  a {
+    text-decoration: none;
+    color: black;
+    font-weight: 5s00;
+    font-size: 1.2rem;
+  }
+
+  .linky {
+    margin: 5px;
+  }
+
+  .active {
+    color: red;
+  }
+}
+
+.contenido {
+  background: #cfcccc;
+  max-height: 100vh;
+  width:100%;
+  height: 150vh;
+  overflow-y: auto;
+}
+
+.negrita {
+  font-weight: bold;
+  color: #004904;
+} 
+.contenedorprincipal {
+  display: flex;
+  flex-direction: column;;
+}
+
+.contenedorsecundario{
+  display: flex;
+  flex-direction: row;
+}
+@media (max-width: 768px) {
+  .contenedorprincipal,
+  .contenedorsecundario {
+    flex-direction: column;
+    display: flex;
+    width: 100%;
+  }
+  .sidebar {
+    position: static; // Quita el fixed en móviles
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid $gray;
+  }
+  .contenido {
+    margin-top: 50px;
+    width: 100%;
+    height: auto;
+    max-height: none;
+  }
+}
+
+.asistencia-container {
+  width:100% !important;
+}
