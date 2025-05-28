@@ -161,38 +161,36 @@ const Asistencia = () => {
 
   return (
     <>
-      <h4>Asistencia</h4>
+      <h4 className="p-4 text-center  fs-2 ">Asistencia</h4>
       <div>
-        <Row>
-          <Col className="text-end">
-            <NavLink to="/asistencia">
-              <Button color="warning">Registrar Nueva Asistencia</Button>
-            </NavLink>
-          </Col>
-          <Col>
-            <Button color="primary" onClick={generarReportePDF}>
-              Generar Reporte PDF
-            </Button>
-          </Col>
-        </Row>
-
-        <div style={{ marginTop: "20px" }}></div>
-
-        <Row>
-          <Col>
+        <div className="d-flex flex-column flex-md-row p-5 gap-4 justify-content-center align-items-center">
+        <div>
+        <NavLink to="/asistencia">
+          <Button color="warning">Registrar Nueva Asistencia</Button>
+        </NavLink>
+        </div>
+        <div>
+        <Button color="primary " onClick={generarReportePDF}>
+         Generar Reporte PDF
+      </Button>
+      </div>
+      </div>
+        <div className="d-flex flex-column flex-md-row p-5 gap-4 justify-content-center align-items-center">
+       
             <Input
               type="date"
               placeholder="Fecha"
               value={selectedDate}
               onChange={(e) => setSelectedDate(e.target.value)}
             />
-          </Col>
-          <Col className="text-end">
+        
+        
             <Input
               placeholder="Seleccionar Grado"
               type="select"
               value={selectedGrado}
               onChange={(e) => setSelectedGrado(e.target.value)}
+              
             >
               <option value="">Seleccionar...</option>
               {grados.map((grado) => (
@@ -201,14 +199,13 @@ const Asistencia = () => {
                 </option>
               ))}
             </Input>
-          </Col>
-        </Row>
+         </div>
       </div>
 
-      <div className="table-responsive p-4">
+      <div className="table-responsive p-1">
         <table className="table table-light table-sm align-middle">
           <thead className="table-dark table text-center">
-            <tr>
+            <tr className="">
               <th scope="col">CUI</th>
               <th scope="col">Nombre</th>
               <th scope="col">Apellido</th>

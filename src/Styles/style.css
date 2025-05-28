@@ -1,17 +1,16 @@
 /* Estilo para el contenedor principal */
-.principal {
-  background-image: url("../Imagenes/logoescuela.png");
-  height: 100; /* Establece un alto mínimo del 100% del alto de la ventana */
+.principal { 
+  height: 100%; /* Establece un alto mínimo del 100% del alto de la ventana */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-family: cursive;
-  background-color: #ffffff;
   position: relative;
   background-repeat: no-repeat;
-  background-size: 40%;
-  background-position: center center;
+  background-size: 30%;
+ 
+  
 }
 
 /* Estilo para el contenedor del formulario */
@@ -76,7 +75,8 @@ button {
 
 .sidebarprincipal{
   position: relative;
-  background-color: aquamarine; 
+   background: lightgray;
+  border: 1px solid #e79494;
   display: flex;
   flex-direction: column;
   align-items: center; 
@@ -148,4 +148,21 @@ button {
     width: 220px;
     height: 100vh;
   }
+}
+
+.logoescuela img {
+  width: 400px;
+  height: 500px; 
+  padding-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .logoescuela img {
+    width: 200px;
+    height: auto;
+  }
+}
+
+.bg-gradient-custom {
+  background: linear-gradient(to bottom, rgb(241, 237, 237), rgb(255, 200, 200));
 }

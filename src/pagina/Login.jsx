@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import "../Styles/style.css";
 import logo from "../Imagenes/umg.png"; // Importa la imagen
+import escudo from "../Imagenes/logoescuela.png"; // Importa la imagen del escudo
 import { Contexto } from "../Context/ContextProvider";
 import { useNavigate } from "react-router-dom";
 const Login = () => {
@@ -36,13 +37,23 @@ const Login = () => {
   }, [usuario]);
   return (
     <div className="principal">
-      <div className="login-container">
+      <div className="login-container"> 
+        <div className="d-flex flex-row justify-content-between align-items-center">
+          <div className="image-container">
+          <img
+            src={escudo}
+            alt="Escudo"
+            style={{ width: "100px", height: "100px" }} // Ajusta el tamaño de la imagen
+          />    
+        </div> 
         <div className="image-container">
           <img
             src={logo}
             alt="UMG"
-            style={{ width: "100px", height: "100px" }} // Ajusta el tamaño de la imagen
+            style={{ width: "90px", height: "90px",  }} // Ajusta el tamaño de la imagen
           />
+        </div> 
+        
         </div>
         <h2>Bienvenido</h2>
         <form onSubmit={handleSubmit}>

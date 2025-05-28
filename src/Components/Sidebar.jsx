@@ -54,14 +54,15 @@ const Sidebar = ({ open, onClose }) => {
             <FaIcons.FaPencilAlt className="me-2" />
             Calificaciones
           </NavLink>
-        </li>
+        </li> 
         <li>
-          <button className="btn btn-primary rounded py-2 w-100 d-inline-block px-2 linky" onClick={onClose}>
-            <FaIcons.FaSignOutAlt className="me-2" />
+          <button className="btn rounded py-5" onClick={onClose}>
+            <FaIcons.FaSignOutAlt className="me-1" />
             Cerrar Sesión
           </button>
         </li>
-      </ul>
+      </ul> 
+      
     </div>
   );
 };
