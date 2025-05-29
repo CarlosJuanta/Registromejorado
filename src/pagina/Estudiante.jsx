@@ -93,9 +93,14 @@ const Estudiante = () => {
 
   return (
     <>
-      <h3>Formulario Registro Nuevo Estudiante</h3>
-      <div className="bg-light p-5" fluid="lg">
-        <Row>
+      <h3 className="text-center pt-2 fw-bold">
+        Formulario Registro Nuevo Estudiante
+      </h3>
+      <div
+        className="p-5 m-5 rounded-4 shadow"
+        style={{ backgroundColor: "rgba(210, 214, 218, 0.4)" }}
+      >
+        <Row className=" col-12 justify-content-between">
           <Col md={3}>
             <FormGroup>
               <Label for="cui">CUI</Label>
@@ -114,7 +119,7 @@ const Estudiante = () => {
               />
             </FormGroup>
           </Col>
-          <Col md={3}>
+          <Col md={4}>
             <FormGroup>
               <Label for="nombres">Nombres</Label>
               <Input
@@ -125,7 +130,7 @@ const Estudiante = () => {
               />
             </FormGroup>
           </Col>
-          <Col md={3}>
+          <Col md={4}>
             <FormGroup>
               <Label for="apellidos">Apellidos</Label>
               <Input
@@ -137,7 +142,7 @@ const Estudiante = () => {
             </FormGroup>
           </Col>
         </Row>
-        <Row>
+        <Row className=" col-12 justify-content-between">
           <Col md={3}>
             <FormGroup>
               <Label for="fechaNac">Fecha Nacimiento</Label>
@@ -149,7 +154,7 @@ const Estudiante = () => {
               />
             </FormGroup>
           </Col>
-          <Col md={3}>
+          <Col md={4}>
             <FormGroup>
               <Label for="direccion">Direccion</Label>
               <Input
@@ -160,7 +165,7 @@ const Estudiante = () => {
               />
             </FormGroup>
           </Col>
-          <Col md={3}>
+          <Col md={4}>
             <FormGroup>
               <Label for="nacionalidad">Nacionalidad</Label>
               <Input
@@ -172,7 +177,7 @@ const Estudiante = () => {
             </FormGroup>
           </Col>
         </Row>
-        <Row>
+        <Row className=" col-12 justify-content-start">
           <Col md={3}>
             <FormGroup>
               <Label for="codigomineduc">Código Mineduc</Label>
@@ -185,7 +190,8 @@ const Estudiante = () => {
             </FormGroup>
           </Col>
         </Row>
-        <Row>
+        <hr className="my-3" /> {/* Línea divisoria aquí */}
+        <Row className=" col-12 justify-content-between">
           <Col md={3}>
             <FormGroup>
               <Label for="cuiencargado">CUI Encargado</Label>
@@ -204,7 +210,7 @@ const Estudiante = () => {
               />
             </FormGroup>
           </Col>
-          <Col md={3}>
+          <Col md={4}>
             <FormGroup>
               <Label for="nombresencargado">Nombres Encargado</Label>
               <Input
@@ -215,7 +221,7 @@ const Estudiante = () => {
               />
             </FormGroup>
           </Col>
-          <Col md={3}>
+          <Col md={4}>
             <FormGroup>
               <Label for="apellidosencargado">Apellidos Encargado</Label>
               <Input
@@ -227,8 +233,19 @@ const Estudiante = () => {
             </FormGroup>
           </Col>
         </Row>
-        <Row>
-          <Col md={5}>
+        <Row className=" col-12 justify-content-between">
+          <Col md={3}>
+            <FormGroup>
+              <Label for="telefono">Telefono</Label>
+              <Input
+                placeholder="telefono"
+                type="number"
+                onChange={(e) => setTelefonoencargadoestudiante(e.target.value)}
+                value={telefonoencargadoestudiante}
+              />
+            </FormGroup>
+          </Col>
+          <Col md={4}>
             <FormGroup>
               <Label for="direccion">Dirección</Label>
               <Input
@@ -241,18 +258,7 @@ const Estudiante = () => {
               />
             </FormGroup>
           </Col>
-          <Col md={3}>
-            <FormGroup>
-              <Label for="telefono">Telefono</Label>
-              <Input
-                placeholder="telefono"
-                type="number"
-                onChange={(e) => setTelefonoencargadoestudiante(e.target.value)}
-                value={telefonoencargadoestudiante}
-              />
-            </FormGroup>
-          </Col>
-          <Col md={3}>
+          <Col md={4}>
             <FormGroup>
               <Label for="correo">Correo</Label>
               <Input
@@ -264,7 +270,8 @@ const Estudiante = () => {
             </FormGroup>
           </Col>
         </Row>
-        <Row>
+        <hr className="my-3" /> {/* Línea divisoria aquí */}
+        <Row className=" col-12 justify-content-between">
           <Col md={3}>
             <FormGroup>
               <Label for="grado">Grado</Label>
@@ -283,9 +290,13 @@ const Estudiante = () => {
             </FormGroup>
           </Col>
         </Row>
-        <Button color="success" onClick={handleSubmit}>
-          Registrar Estudiante
-        </Button>
+        <Row>
+          <Col className="text-center col-12 ">
+            <Button className=" w-50" color="success" onClick={handleSubmit}>
+              Registrar Estudiante
+            </Button>
+          </Col>
+        </Row>
       </div>
     </>
   );

@@ -63,8 +63,11 @@ const Grado = () => {
 
   return (
     <>
-      <h3>Formulario Crear Grado</h3>
-      <div className="bg-light p-4">
+      <h3 className="text-center pt-2 fw-bold">Formulario Crear Grado</h3>
+      <div
+        className="p-5 m-5 rounded-4 shadow"
+        style={{ backgroundColor: "rgba(210, 214, 218, 0.4)" }}
+      >
         <Row>
           <Col md={3}>
             <FormGroup>
@@ -77,7 +80,7 @@ const Grado = () => {
               />
             </FormGroup>
           </Col>
-          <Col md={3}>
+          <Col md={4}>
             <FormGroup>
               <Label for="Nombre Grado">Nombre Grado</Label>
               <Input
@@ -97,7 +100,7 @@ const Grado = () => {
               </Input>
             </FormGroup>
           </Col>
-          <Col md={3}>
+          <Col md={4}>
             <FormGroup>
               <Label for="descripciongrado">Descripción</Label>
               <Input
@@ -127,7 +130,7 @@ const Grado = () => {
               </Input>
             </FormGroup>
           </Col>
-          <Col md={3}>
+          <Col md={4}>
             <FormGroup>
               <Label for="cuidocenteasignado">Nombre docente asignado</Label>
               <Input
@@ -145,9 +148,13 @@ const Grado = () => {
             </FormGroup>
           </Col>
         </Row>
-        <Button color="success" onClick={handleSubmit}>
-          Registrar Grado
-        </Button>
+        <Row>
+          <Col className="text-center col-12 pt-3 ">
+            <Button className="w-50" color="success" onClick={handleSubmit}>
+              Registrar Grado
+            </Button>
+          </Col>
+        </Row>
       </div>
     </>
   );

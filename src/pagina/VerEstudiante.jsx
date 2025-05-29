@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Contexto } from "../Context/ContextProvider";
+import { FaSearch } from "react-icons/fa";
 import API_URL from "../Configure";
+import "../Styles/style.css";
 import {
   FormGroup,
   Label,
@@ -275,40 +277,42 @@ const VerEstudiante = () => {
     if (usuario.rol === "admin") {
       return (
         <>
-          <h4>Estudiante</h4>
+          <h4 className="text-center pt-3 fw-bold">Estudiante</h4>
           <div className="p-5">
-            <Row>
-              <Col>
-                <Button
-                  color="primary"
-                  onClick={() => {
-                    getEstudiantes();
-                  }}
-                >
-                  Buscar
-                </Button>
+            <Row className="mb-3">
+              <Col md={8}>
+                <div className="input-group">
+                  <Input
+                    placeholder="Buscar Estudiante por Nombre"
+                    type="text"
+                    value={filtroNombre}
+                    onChange={(e) => setFiltroNombre(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") getEstudiantes();
+                    }}
+                  />
+                  <Button
+                    color="primary"
+                    onClick={getEstudiantes}
+                    style={{
+                      borderTopLeftRadius: 0,
+                      borderBottomLeftRadius: 0,
+                    }}
+                  >
+                    <FaSearch />
+                  </Button>
+                </div>
               </Col>
-            </Row>
-            <div style={{ marginTop: "20px" }}></div>
-            <Row>
-              <Col sm={12} md={6}>
-                <Input
-                  placeholder="Buscar Estudiante por Nombre"
-                  type="text-area"
-                  value={filtroNombre}
-                  onChange={(e) => setFiltroNombre(e.target.value)}
-                />
-              </Col>
-              <Col className="text-end">
+              <Col className="text-start text-md-end pt-md-0 pt-3">
                 <NavLink to="/estudiante">
                   <Button color="success">Crear Estudiante</Button>
                 </NavLink>
               </Col>
             </Row>
           </div>
-          <div className="table-responsive p-5">
+          <div className="table-responsive p-5 ">
             {datos.length > 0 ? (
-              <table className="table table-hover table-light table-sm align-middle table-striped">
+              <table className="table  table-sm align-middle fs-6  ">
                 <thead className="table-dark table text-center">
                   <tr>
                     <th scope="col">CUI</th>
@@ -325,7 +329,7 @@ const VerEstudiante = () => {
                 </thead>
                 <tbody className="table text-center">
                   {datos.map((estudiante, index) => (
-                    <tr key={index._id}>
+                    <tr key={estudiante._id}>
                       <td>{estudiante.cuiEstudiante}</td>
                       <td>{estudiante.nombreEstudiante}</td>
                       <td>{estudiante.apellidoEstudiante}</td>
@@ -397,7 +401,11 @@ const VerEstudiante = () => {
             )}
           </div>
 
-          <Modal isOpen={modal} toggle={toggleModal}>
+          <Modal
+            isOpen={modal}
+            toggle={toggleModal}
+            className="modal-encargado-custom"
+          >
             <ModalHeader toggle={toggleModal}>
               Detalles del Encargado
             </ModalHeader>

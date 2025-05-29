@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import API_URL from "../Configure";
+import { FaSearch } from "react-icons/fa";
 import { Contexto } from "../Context/ContextProvider";
+
 import {
   FormGroup,
   Label,
@@ -231,33 +233,35 @@ const VerGrado = () => {
     if (usuario.rol === "admin") {
       return (
         <>
-          <h4>Grado</h4>
+          <h4 className="text-center pw-bold pt-3">Grado</h4>
           <div className="p-5">
-            <Row>
-              <Col>
-                <Button
-                  color="primary"
-                  onClick={() => {
-                    getGrados();
-                  }}
-                >
-                  Buscar
-                </Button>
+            <Row className="mb-3">
+              <Col md={8}>
+                <div className="input-group">
+                  <Input
+                    placeholder="Buscar Grados"
+                    type="text"
+                    value={filtroNombre}
+                    onChange={(e) => setFiltroNombre(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") getGrados();
+                    }}
+                  />
+                  <Button
+                    color="primary"
+                    onClick={getGrados}
+                    style={{
+                      borderTopLeftRadius: 0,
+                      borderBottomLeftRadius: 0,
+                    }}
+                  >
+                    <FaSearch />
+                  </Button>
+                </div>
               </Col>
-            </Row>
-            <div style={{ marginTop: "20px" }}></div>
-            <Row>
-              <Col sm={12} md={6}>
-                <Input
-                  placeholder="Buscar Grado por Nombre"
-                  type="text-area"
-                  value={filtroNombre}
-                  onChange={(e) => setFiltroNombre(e.target.value)}
-                />
-              </Col>
-              <Col className="text-end">
+              <Col className="text-start text-md-end pt-md-0 pt-3">
                 <NavLink to="/grado">
-                  <Button color="success">Registrar Grado</Button>
+                  <Button color="success">Crear Grado</Button>
                 </NavLink>
               </Col>
             </Row>

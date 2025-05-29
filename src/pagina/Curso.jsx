@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { FaSearch } from "react-icons/fa";
 import { Contexto } from "../Context/ContextProvider";
 import API_URL from "../Configure";
 import {
@@ -215,33 +216,35 @@ const VerCurso = () => {
     if (usuario.rol === "admin") {
       return (
         <>
-          <h4>Curso</h4>
+          <h4 className="text-center fw-bold pt-3">Curso</h4>
           <div className="p-5">
-            <Row>
-              <Col>
-                <Button
-                  color="primary"
-                  onClick={() => {
-                    getCursos();
-                  }}
-                >
-                  Buscar
-                </Button>
+            <Row className="mb-3">
+              <Col md={8}>
+                <div className="input-group">
+                  <Input
+                    placeholder="Buscar Cursos"
+                    type="text"
+                    value={filtroNombre}
+                    onChange={(e) => setFiltroNombre(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") getCursos();
+                    }}
+                  />
+                  <Button
+                    color="primary"
+                    onClick={getCursos}
+                    style={{
+                      borderTopLeftRadius: 0,
+                      borderBottomLeftRadius: 0,
+                    }}
+                  >
+                    <FaSearch />
+                  </Button>
+                </div>
               </Col>
-            </Row>
-            <div style={{ marginTop: "20px" }}></div>
-            <Row>
-              <Col sm={12} md={6}>
-                <Input
-                  placeholder="Buscar Curso por Nombre"
-                  type="text-area"
-                  value={filtroNombre}
-                  onChange={(e) => setFiltroNombre(e.target.value)}
-                />
-              </Col>
-              <Col className="text-end">
+              <Col className="text-start text-md-end pt-md-0 pt-3">
                 <NavLink to="/crearcurso">
-                  <Button color="success">Registrar Curso</Button>
+                  <Button color="success">Crear Curso </Button>
                 </NavLink>
               </Col>
             </Row>

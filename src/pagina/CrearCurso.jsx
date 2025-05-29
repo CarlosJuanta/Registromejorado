@@ -60,9 +60,12 @@ const Curso = () => {
 
   return (
     <>
-      <h3>Formulario Crear Curso</h3>
-      <div className="bg-light p-4">
-        <Row>
+      <h3 className="text-center fw-bold pt-2">Formulario Crear Curso</h3>
+      <div
+        className="p-5 m-5 rounded-4 shadow "
+        style={{ backgroundColor: "rgba(210, 214, 218, 0.4)" }}
+      >
+        <Row className="justify-content-between">
           <Col md={3}>
             <FormGroup>
               <Label for="codigoCurso">Código Curso</Label>
@@ -74,7 +77,7 @@ const Curso = () => {
               />
             </FormGroup>
           </Col>
-          <Col md={3}>
+          <Col md={4}>
             <FormGroup>
               <Label for="nombreCurso">Nombre Curso</Label>
               <Input
@@ -85,7 +88,7 @@ const Curso = () => {
               />
             </FormGroup>
           </Col>
-          <Col md={3}>
+          <Col md={4}>
             <FormGroup>
               <Label for="descripcionCurso">Descripción</Label>
               <Input
@@ -97,6 +100,7 @@ const Curso = () => {
             </FormGroup>
           </Col>
         </Row>
+        <hr className="my-3" /> {/* Línea divisoria aquí */}
         <Row>
           <Col md={3}>
             <FormGroup>
@@ -116,9 +120,13 @@ const Curso = () => {
             </FormGroup>
           </Col>
         </Row>
-        <Button color="success" onClick={handleSubmit}>
-          Registrar Curso
-        </Button>
+        <Row>
+          <Col className="text-center pt-3">
+            <Button className="w-50" color="success" onClick={handleSubmit}>
+              Registrar Curso
+            </Button>
+          </Col>
+        </Row>
       </div>
     </>
   );

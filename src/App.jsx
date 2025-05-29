@@ -60,17 +60,33 @@ const App = () => {
               <Route exact path="/grado" element={<Grado />} />
               <Route exact path="/curso" element={<Curso />} />
               <Route exact path="/asistencia" element={<Asistencia />} />
-              <Route exact path="/calificaciones" element={<Calificaciones />} />
+              <Route
+                exact
+                path="/calificaciones"
+                element={<Calificaciones />}
+              />
               <Route exact path="/verestudiante" element={<VerEstudiante />} />
-              <Route exact path="/encargadoinfo/:id" element={<EncargadoInfo />} />
+              <Route
+                exact
+                path="/encargadoinfo/:id"
+                element={<EncargadoInfo />}
+              />
               <Route exact path="/verdocente" element={<VerDocente />} />
               <Route exact path="/gradodocente" element={<GradoDocente />} />
               <Route exact path="/vergrado" element={<VerGrado />} />
               <Route exact path="/crearcurso" element={<CrearCurso />} />
               <Route exact path="/verfalta" element={<VerFalta />} />
               <Route exact path="/verasistencia" element={<VerAsistencia />} />
-              <Route exact path="/calificacioncurso" element={<CalificacionCurso />} />
-              <Route exact path="/vercalificacioncurso" element={<VerCalificacionCurso />} />
+              <Route
+                exact
+                path="/calificacioncurso"
+                element={<CalificacionCurso />}
+              />
+              <Route
+                exact
+                path="/vercalificacioncurso"
+                element={<VerCalificacionCurso />}
+              />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </div>

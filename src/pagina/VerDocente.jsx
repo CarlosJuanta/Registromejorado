@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import API_URL from "../Configure";
 import { Contexto } from "../Context/ContextProvider";
+import { FaSearch } from "react-icons/fa";
 import {
   Input,
   Col,
@@ -146,33 +147,35 @@ const VerDocente = () => {
     if (usuario.rol === "admin") {
       return (
         <>
-          <h4>Docente</h4>
+          <h4 className="fw-bold text-center pt-3">Docente</h4>
           <div className="p-5">
-            <Row>
-              <Col>
-                <Button
-                  color="primary"
-                  onClick={() => {
-                    getDocentes();
-                  }}
-                >
-                  Buscar
-                </Button>
+            <Row className="mb-3">
+              <Col md={8}>
+                <div className="input-group">
+                  <Input
+                    placeholder="Buscar Docentepor Nombre"
+                    type="text"
+                    value={filtroNombre}
+                    onChange={(e) => setFiltroNombre(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") getDocentes();
+                    }}
+                  />
+                  <Button
+                    color="primary"
+                    onClick={getDocentes}
+                    style={{
+                      borderTopLeftRadius: 0,
+                      borderBottomLeftRadius: 0,
+                    }}
+                  >
+                    <FaSearch />
+                  </Button>
+                </div>
               </Col>
-            </Row>
-            <div style={{ marginTop: "20px" }}></div>
-            <Row>
-              <Col sm={12} md={6}>
-                <Input
-                  placeholder="Buscar Docente por Nombre"
-                  type="text-area"
-                  value={filtroNombre}
-                  onChange={(e) => setFiltroNombre(e.target.value)}
-                />
-              </Col>
-              <Col className="text-end">
+              <Col className="text-start text-md-end pt-md-0 pt-3">
                 <NavLink to="/docente">
-                  <Button color="success">Registrar Docente</Button>
+                  <Button color="success">Crear Docente</Button>
                 </NavLink>
               </Col>
             </Row>
@@ -183,7 +186,7 @@ const VerDocente = () => {
                 <p className="negrita">
                   Total de docentes registrados: {totalDocentes}
                 </p>
-                <table className="table table-hover table-light table-sm align-middle table-striped">
+                <table className="table table-hover  table-sm align-middle fs-6 ">
                   {/* El contenido de la tabla se mostrará solo si hay datos */}
                   <thead className="table-dark table text-center">
                     <tr>

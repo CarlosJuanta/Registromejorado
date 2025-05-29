@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import API_URL from "../Configure";
-import logo from "../Imagenes/logoescuela.png"; // Importa la imagen 
+import logo from "../Imagenes/logoescuela.png"; // Importa la imagen
 import {
   Button,
   Input,
@@ -163,46 +163,43 @@ const Asistencia = () => {
     <>
       <h4 className="p-4 text-center  fs-2 ">Asistencia</h4>
       <div>
-        <div className="d-flex flex-column flex-md-row p-5 gap-4 justify-content-center align-items-center">
-        <div>
-        <NavLink to="/asistencia">
-          <Button color="warning">Registrar Nueva Asistencia</Button>
-        </NavLink>
+        <div className="d-flex flex-column flex-md-row p-3 gap-4 justify-content-center align-items-center">
+          <div>
+            <NavLink to="/asistencia">
+              <Button color="warning">Registrar Nueva Asistencia</Button>
+            </NavLink>
+          </div>
+          <div>
+            <Button color="primary " onClick={generarReportePDF}>
+              Generar Reporte PDF
+            </Button>
+          </div>
         </div>
-        <div>
-        <Button color="primary " onClick={generarReportePDF}>
-         Generar Reporte PDF
-      </Button>
-      </div>
-      </div>
-        <div className="d-flex flex-column flex-md-row p-5 gap-4 justify-content-center align-items-center">
-       
-            <Input
-              type="date"
-              placeholder="Fecha"
-              value={selectedDate}
-              onChange={(e) => setSelectedDate(e.target.value)}
-            />
-        
-        
-            <Input
-              placeholder="Seleccionar Grado"
-              type="select"
-              value={selectedGrado}
-              onChange={(e) => setSelectedGrado(e.target.value)}
-              
-            >
-              <option value="">Seleccionar...</option>
-              {grados.map((grado) => (
-                <option key={grado.codigoGrado} value={grado.codigoGrado}>
-                  {`${grado.nombreGrado} ${grado.seccionGrado}`}
-                </option>
-              ))}
-            </Input>
-         </div>
+        <div className="d-flex flex-column flex-md-row pe-5 ps-5 gap-4 justify-content-center align-items-center">
+          <Input
+            type="date"
+            placeholder="Fecha"
+            value={selectedDate}
+            onChange={(e) => setSelectedDate(e.target.value)}
+          />
+
+          <Input
+            placeholder="Seleccionar Grado"
+            type="select"
+            value={selectedGrado}
+            onChange={(e) => setSelectedGrado(e.target.value)}
+          >
+            <option value="">Seleccionar...</option>
+            {grados.map((grado) => (
+              <option key={grado.codigoGrado} value={grado.codigoGrado}>
+                {`${grado.nombreGrado} ${grado.seccionGrado}`}
+              </option>
+            ))}
+          </Input>
+        </div>
       </div>
 
-      <div className="table-responsive p-1">
+      <div className="table-responsive p-5">
         <table className="table table-light table-sm align-middle">
           <thead className="table-dark table text-center">
             <tr className="">

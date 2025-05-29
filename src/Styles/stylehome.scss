@@ -13,7 +13,7 @@ $gray: rgb(219, 219, 219);
 
 .flex {
   display: flex;
-} 
+}
 
 .sidebar {
   width: 14rem;
@@ -48,7 +48,7 @@ $gray: rgb(219, 219, 219);
 .contenido {
   background: linear-gradient(to bottom, rgb(185, 86, 86), rgb(255, 200, 200));
   max-height: 100vh;
-  width:100%;
+  width: 100%;
   height: 150vh;
   overflow-y: auto;
 }
@@ -56,13 +56,13 @@ $gray: rgb(219, 219, 219);
 .negrita {
   font-weight: bold;
   color: #004904;
-} 
+}
 .contenedorprincipal {
   display: flex;
-  flex-direction: column;;
+  flex-direction: column;
 }
 
-.contenedorsecundario{
+.contenedorsecundario {
   display: flex;
   flex-direction: row;
 }
@@ -83,11 +83,10 @@ $gray: rgb(219, 219, 219);
   .contenido {
     margin-top: 50px;
     width: 100%;
-    height: auto;
     max-height: none;
   }
 }
 
 .asistencia-container {
-  width:100% !important;
+  width: 100% !important;
 }

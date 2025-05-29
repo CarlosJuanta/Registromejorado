@@ -60,8 +60,13 @@ const Docente = () => {
 
   return (
     <>
-      <h3>Formulario Registro Nuevo Docente</h3>
-      <div className="bg-light p-4">
+      <h3 className="text-center pt-2 fw-bold">
+        Formulario Registro Nuevo Docente
+      </h3>
+      <div
+        className="p-5 m-5 rounded-4 shadow"
+        style={{ backgroundColor: "rgba(210, 214, 218, 0.4)" }}
+      >
         <Row>
           <Col md={3}>
             <FormGroup>
@@ -81,7 +86,7 @@ const Docente = () => {
               />
             </FormGroup>
           </Col>
-          <Col md={3}>
+          <Col md={4}>
             <FormGroup>
               <Label for="nombresdocente">Nombres</Label>
               <Input
@@ -92,7 +97,7 @@ const Docente = () => {
               />
             </FormGroup>
           </Col>
-          <Col md={3}>
+          <Col md={4}>
             <FormGroup>
               <Label for="apellidosdocente">Apellidos</Label>
               <Input
@@ -118,7 +123,7 @@ const Docente = () => {
               />
             </FormGroup>
           </Col>
-          <Col md={3}>
+          <Col md={4}>
             <FormGroup>
               <Label for="correodocente">Correo</Label>
               <Input
@@ -129,7 +134,7 @@ const Docente = () => {
               />
             </FormGroup>
           </Col>
-          <Col md={3}>
+          <Col md={4}>
             <FormGroup>
               <Label for="direcciondocente">Dirección</Label>
               <Input
@@ -153,52 +158,56 @@ const Docente = () => {
               />
             </FormGroup>
           </Col>
-          <Row>
-            <Col>
-              <FormGroup>
-                <Label for="rol">Rol</Label>
-                <Input
-                  type="select"
-                  onChange={(e) => setRol(e.target.value)}
-                  value={rol}
-                >
-                  <option value="">Seleccione un Rol</option>
-                  <option value="admin">Administrador</option>
-                  <option value="docente">Docente</option>
-                </Input>
-              </FormGroup>
-            </Col>
-            <Col>
-              <FormGroup>
-                <Label for="username">Usuario</Label>
-                <Input
-                  type="text-area"
-                  name="username"
-                  id="username"
-                  placeholder="Username"
-                  onChange={(e) => setUsername(e.target.value)}
-                  value={username}
-                />
-              </FormGroup>
-            </Col>
-            <Col>
-              <FormGroup>
-                <Label for="password">Contraseña</Label>
-                <Input
-                  type="text-area"
-                  name="password"
-                  id="password"
-                  placeholder="Password"
-                  onChange={(e) => setPassword(e.target.value)}
-                  value={password}
-                />
-              </FormGroup>
-            </Col>
-          </Row>
         </Row>
-        <Button color="success" onClick={handleSubmit}>
-          Registrar Docente
-        </Button>
+        <Row>
+          <Col md={3}>
+            <FormGroup>
+              <Label for="rol">Rol</Label>
+              <Input
+                type="select"
+                onChange={(e) => setRol(e.target.value)}
+                value={rol}
+              >
+                <option value="">Seleccione un Rol</option>
+                <option value="admin">Administrador</option>
+                <option value="docente">Docente</option>
+              </Input>
+            </FormGroup>
+          </Col>
+          <Col md={4}>
+            <FormGroup>
+              <Label for="username">Usuario</Label>
+              <Input
+                type="text-area"
+                name="username"
+                id="username"
+                placeholder="Username"
+                onChange={(e) => setUsername(e.target.value)}
+                value={username}
+              />
+            </FormGroup>
+          </Col>
+          <Col md={4}>
+            <FormGroup>
+              <Label for="password">Contraseña</Label>
+              <Input
+                type="text-area"
+                name="password"
+                id="password"
+                placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+              />
+            </FormGroup>
+          </Col>
+        </Row>
+        <Row>
+          <Col className="text-center pt-3">
+            <Button className="w-50" color="success" onClick={handleSubmit}>
+              Registrar Docente
+            </Button>
+          </Col>
+        </Row>
       </div>
     </>
   );
