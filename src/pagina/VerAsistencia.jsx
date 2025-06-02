@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import { FaEye } from "react-icons/fa";
 import API_URL from "../Configure";
 import logo from "../Imagenes/logoescuela.png"; // Importa la imagen
 import {
@@ -200,17 +201,21 @@ const Asistencia = () => {
       </div>
 
       <div className="table-responsive p-5">
-        <table className="table table-light table-sm align-middle">
-          <thead className="table-dark table text-center">
+        <table className="table table-light  border table-hover table-sm border rounded-2 shadow overflow-hidden align-middle font-monospace">
+          <thead className="table-dark table text-center align-middle">
             <tr className="">
-              <th scope="col">CUI</th>
+              <th scope="col" style={{ width: "220px" }}>
+                CUI
+              </th>
               <th scope="col">Nombre</th>
               <th scope="col">Apellido</th>
               <th scope="col">Grado</th>
               <th scope="col">Asistencias</th>
               <th scope="col">Total Asistencias</th>
               <th scope="col">Porcentaje</th>
-              <th scope="col">Llamados de Atención</th>
+              <th scope="col" style={{ width: "150px" }}>
+                Llamados de Atención
+              </th>
             </tr>
           </thead>
           <tbody className="table text-center table-hover">
@@ -239,14 +244,31 @@ const Asistencia = () => {
                     )}
                   </td>
                   <td>{totalAsistencias}</td>
-                  <td>{((totalAsistencias / 55) * 100).toFixed(2)}%</td>
-                  <td>
-                    <Button
-                      color="primary"
-                      onClick={() => abrirModal(estudiante)}
+                  <td style={{ color: "green" }}>
+                    {((totalAsistencias / 55) * 100).toFixed(2)}%
+                  </td>
+                  <td className="d-flex justify-content-center">
+                    <a
+                      href="#"
+                      className="  me-2 d-flex flex-column align-items-center mt-2 mb-2"
+                      style={{ textDecoration: "none" }}
+                      title="Ver"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        abrirModal(estudiante);
+                      }}
                     >
-                      Ver
-                    </Button>
+                      <FaEye size={30} color="rgb(36 101 147)" />
+                      <span
+                        style={{
+                          fontSize: "10px",
+                          textDecoration: "none",
+                          color: "black",
+                        }}
+                      >
+                        Ver
+                      </span>
+                    </a>
                   </td>
                 </tr>
               );

@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
+import { FaEye } from "react-icons/fa";
+import { FaEdit } from "react-icons/fa";
 import { Contexto } from "../Context/ContextProvider";
 import { Navigate, useNavigate } from "react-router-dom";
 import logo from "../Imagenes/logoescuela.png"; // Importa la imagen
@@ -290,10 +292,10 @@ const Asistencia = () => {
   } else if (usuario.rol === "admin" || usuario.rol === "docente") {
     return (
       <>
-        <h4>Calificaciones</h4>
-        <div className="p-5">
+        <h4 className="text-center pt-3 fw-bold ">Calificaciones</h4>
+        <div className="col-12 p-5">
           <Row>
-            <Col className="text-end">
+            <Col className="mt-4">
               <Input
                 placeholder="Seleccionar Grado"
                 type="select"
@@ -310,41 +312,69 @@ const Asistencia = () => {
             </Col>
           </Row>
         </div>
-        <div className="table-responsive p-4">
-          <table className="table table-light table-sm align-middle table-striped">
-            <thead className="table-dark table text-center">
+        <div className=" table table-responsive p-5">
+          <table className="table table-light  border table-hover table-sm border rounded-2 shadow overflow-hidden align-middle font-monospace">
+            <thead className="table-dark text-center p-3 align-middle">
               <tr>
                 <th scope="col">CUI</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Apellido</th>
                 <th scope="col">Grado</th>
-                <th scope="col">Acciones</th>
+                <th scope="col" style={{ width: "150px" }}>
+                  Acciones
+                </th>
               </tr>
             </thead>
-            <tbody className="table text-center ">
+            <tbody className="text-center ">
               {estudiantes.map((estudiante, index) => (
                 <tr key={estudiante._id}>
                   <td>{estudiante.cuiEstudiante}</td>
                   <td>{estudiante.nombreEstudiante}</td>
                   <td>{estudiante.apellidoEstudiante}</td>
                   <td>{estudiante.codigoGrado[0].nombreGrado}</td>
-                  <td>
-                    <td>
-                      <Button
-                        color="success"
-                        onClick={() => abrirModal(estudiante)}
+                  <td className="d-flex p-2 justify-content-center">
+                    <a
+                      href="#"
+                      className="  me-2 d-flex flex-column align-items-center mt-2 mb-2 me-3"
+                      style={{ textDecoration: "none" }}
+                      title="Ver"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        abrirModal(estudiante);
+                      }}
+                    >
+                      <FaEye size={30} color="rgb(36 101 147)" />
+                      <span
+                        style={{
+                          fontSize: "10px",
+                          textDecoration: "none",
+                          color: "black",
+                        }}
                       >
                         Ver
-                      </Button>
-                    </td>
-                    <td>
-                      <Button
-                        color="warning"
-                        onClick={() => abrirModalRegistrarNotas(estudiante)}
+                      </span>
+                    </a>
+                    <a
+                      href="#"
+                      className=" d-flex flex-column align-items-center mt-2 me-2 mb-2"
+                      style={{ textDecoration: "none" }}
+                      title="Registrar"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        abrirModalRegistrarNotas(estudiante);
+                      }}
+                    >
+                      <FaEdit size={30} color="rgb(39 145 14)" />
+                      <span
+                        style={{
+                          fontSize: "10px",
+                          textDecoration: "none",
+                          color: "black",
+                        }}
                       >
                         Registrar
-                      </Button>
-                    </td>
+                      </span>
+                    </a>
                   </td>
                 </tr>
               ))}

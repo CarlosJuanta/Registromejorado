@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Contexto } from "../Context/ContextProvider";
+
+import { FaEye } from "react-icons/fa";
+import { FaEdit } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
 import API_URL from "../Configure";
 import "../Styles/style.css";
 import {
@@ -310,79 +315,136 @@ const VerEstudiante = () => {
               </Col>
             </Row>
           </div>
-          <div className="table-responsive p-5 ">
-            {datos.length > 0 ? (
-              <table className="table  table-sm align-middle fs-6  ">
-                <thead className="table-dark table text-center">
-                  <tr>
-                    <th scope="col">CUI</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellido</th>
-                    <th scope="col">Fecha de Nacimiento</th>
-                    <th scope="col">Dirección</th>
-                    <th scope="col">Nacionalidad</th>
-                    <th scope="col">Código MINEDUC</th>
-                    <th scope="col">Encargado</th>
-                    <th scope="col">Grados</th>
-                    <th scope="col">Estudiante</th>
-                  </tr>
-                </thead>
-                <tbody className="table text-center">
-                  {datos.map((estudiante, index) => (
-                    <tr key={estudiante._id}>
-                      <td>{estudiante.cuiEstudiante}</td>
-                      <td>{estudiante.nombreEstudiante}</td>
-                      <td>{estudiante.apellidoEstudiante}</td>
-                      <td>
-                        {new Date(
-                          estudiante.fechanacEstudiante
-                        ).toLocaleDateString("es-ES")}
-                      </td>
-                      <td>{estudiante.direccionEstudiante}</td>
-                      <td>{estudiante.nacionalidadEstudiante}</td>
-                      <td>{estudiante.codigomineducEstudiante}</td>
-                      <td>
-                        <Button
-                          color="success"
-                          onClick={() => {
-                            handleVerClick(estudiante);
-                          }}
-                        >
-                          Ver
-                        </Button>
-                      </td>
-                      <td>
+          <div className="px-5" style={{}}>
+            <div style={{ maxHeight: "75vh", overflowY: "auto" }}>
+              {datos.length > 0 ? (
+                <table className="table table-light border table-hover table-sm rounded-2 shadow align-middle font-monospace">
+                  <thead className="table-dark text-center fs-6 sticky-top">
+                    <tr>
+                      <th scope="col">No.</th>
+                      <th scope="col">CUI</th>
+                      <th scope="col">Nombre</th>
+                      <th scope="col">Apellido</th>
+                      <th scope="col">Fecha de Nacimiento</th>
+                      <th scope="col">Dirección</th>
+                      <th scope="col">Nacionalidad</th>
+                      <th scope="col">Código MINEDUC</th>
+                      <th scope="col">Encargado</th>
+                      <th scope="col">Asignar Grado</th>
+                      <th scope="col">Quitar Grado</th>
+                      <th scope="col">Editar Información</th>
+                      <th scope="col">Estado</th>
+                    </tr>
+                  </thead>
+                  <tbody className="table text-center">
+                    {datos.map((estudiante, index) => (
+                      <tr key={estudiante._id}>
+                        <td>{index + 1}</td>
+                        <td>{estudiante.cuiEstudiante}</td>
+                        <td>{estudiante.nombreEstudiante}</td>
+                        <td>{estudiante.apellidoEstudiante}</td>
                         <td>
-                          <Button
-                            color="info"
-                            onClick={() => {
+                          {new Date(
+                            estudiante.fechanacEstudiante
+                          ).toLocaleDateString("es-ES")}
+                        </td>
+                        <td>{estudiante.direccionEstudiante}</td>
+                        <td>{estudiante.nacionalidadEstudiante}</td>
+                        <td className="fw-bold">
+                          {estudiante.codigomineducEstudiante}
+                        </td>
+                        <td>
+                          <a
+                            href="#"
+                            className="  me-2 d-flex flex-column align-items-center mt-2 mb-2"
+                            style={{ textDecoration: "none" }}
+                            title="Ver"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleVerClick(estudiante);
+                            }}
+                          >
+                            <FaEye size={30} color="rgb(36 101 147)" />
+                            <span
+                              style={{
+                                fontSize: "10px",
+                                textDecoration: "none",
+                                color: "black",
+                              }}
+                            >
+                              Ver
+                            </span>
+                          </a>
+                        </td>
+                        <td>
+                          <a
+                            href="#"
+                            className="  me-2 d-flex flex-column align-items-center mt-2 mb-2"
+                            style={{ textDecoration: "none" }}
+                            title="Asignar"
+                            onClick={(e) => {
+                              e.preventDefault();
                               handleAsignarGrado(estudiante);
                             }}
                           >
-                            Asignar
-                          </Button>
+                            <FaPlus size={30} color="rgb(77 161 169)" />
+                            <span
+                              style={{
+                                fontSize: "10px",
+                                textDecoration: "none",
+                                color: "black",
+                              }}
+                            >
+                              Asignar
+                            </span>
+                          </a>
                         </td>
                         <td>
-                          <Button
-                            color="danger"
-                            onClick={() => {
+                          <a
+                            href="#"
+                            className="  me-2 d-flex flex-column align-items-center mt-2 mb-2"
+                            style={{ textDecoration: "none" }}
+                            title="Eliminar"
+                            onClick={(e) => {
+                              e.preventDefault();
                               handleEliminarGrado(estudiante);
                             }}
                           >
-                            Eliminar
-                          </Button>
+                            <FaTrash size={30} color="#b12121c9" />
+                            <span
+                              style={{
+                                fontSize: "10px",
+                                textDecoration: "none",
+                                color: "black",
+                              }}
+                            >
+                              Eliminar
+                            </span>
+                          </a>
                         </td>
-                      </td>
-                      <td>
+
                         <td>
-                          <Button
-                            color="warning"
-                            onClick={() => {
+                          <a
+                            href="#"
+                            className="  me-2 d-flex flex-column align-items-center mt-2 mb-2"
+                            style={{ textDecoration: "none" }}
+                            title="Editar"
+                            onClick={(e) => {
+                              e.preventDefault();
                               handleEditarClick(estudiante);
                             }}
                           >
-                            Editar
-                          </Button>
+                            <FaEdit size={30} color="rgb(39 145 14)" />
+                            <span
+                              style={{
+                                fontSize: "10px",
+                                textDecoration: "none",
+                                color: "black",
+                              }}
+                            >
+                              Editar
+                            </span>
+                          </a>
                         </td>
                         <td>
                           {estudiante.estadoEstudiante === false ? (
@@ -391,14 +453,14 @@ const VerEstudiante = () => {
                             <span className="text-success">Activo</span>
                           )}
                         </td>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            ) : (
-              <p>No se encontraron resultados.</p>
-            )}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              ) : (
+                <p>No se encontraron resultados.</p>
+              )}
+            </div>
           </div>
 
           <Modal

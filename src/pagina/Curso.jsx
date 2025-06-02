@@ -1,7 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
+import { FaEye } from "react-icons/fa";
+import { FaEdit } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
+import { FaMousePointer } from "react-icons/fa";
 import { Contexto } from "../Context/ContextProvider";
 import API_URL from "../Configure";
+
 import {
   Input,
   Col,
@@ -251,54 +257,93 @@ const VerCurso = () => {
           </div>
           <div className="table-responsive p-5">
             {datos.length > 0 ? (
-              <table className="table table-hover table-light table-sm align-middle table-striped">
+              <table className="table table-light  border table-hover table-sm border rounded-2 shadow overflow-hidden align-middle font-monospace">
                 {/* El contenido de la tabla se mostrará solo si hay datos */}
-                <thead className="table-dark table text-center">
+                <thead className="table-dark text-center algin-middle">
                   <tr>
                     <th scope="col">Código</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Descripción</th>
-                    <th scope="col">Grado Asignado </th>
+                    <th scope="col" style={{ width: "150px" }}>
+                      Grado Asignado{" "}
+                    </th>
                     <th scope="col">Acciones</th>
+                    <th scope="col"></th>
                   </tr>
                 </thead>
                 <tbody className="table text-center">
                   {datos.map((curso) => (
-                    <tr key={curso.codigoCurso}>
-                      <td className="negrita">{curso.codigoCurso}</td>
-                      <td className="negrita">{curso.nombreCurso}</td>
-                      <td className="negrita">{curso.descripcionCurso}</td>
+                    <tr key={curso.codigoCurso} className="align-middle">
+                      <td>{curso.codigoCurso}</td>
+                      <td>{curso.nombreCurso}</td>
+                      <td>{curso.descripcionCurso}</td>
                       <td>
-                        <Button
-                          color="success"
-                          onClick={() => {
+                        <a
+                          href="#"
+                          className="  me-2 d-flex flex-column align-items-center mt-2 mb-2"
+                          style={{ textDecoration: "none" }}
+                          title="Ver"
+                          onClick={(e) => {
+                            e.preventDefault();
                             handleVerClick(curso);
                           }}
                         >
-                          Ver
-                        </Button>
+                          <FaEye size={30} color="rgb(36 101 147)" />
+                          <span
+                            style={{
+                              fontSize: "10px",
+                              textDecoration: "none",
+                              color: "black",
+                            }}
+                          >
+                            Ver
+                          </span>
+                        </a>
                       </td>
                       <td>
-                        <td>
-                          <Button
-                            color="warning mr-2"
-                            onClick={() => {
-                              handleEditClick(curso);
+                        <a
+                          href="#"
+                          className=" me-2 d-flex flex-column align-items-center mt-2 mb-2"
+                          style={{ textDecoration: "none" }}
+                          title="Editar"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleEditClick(curso);
+                          }}
+                        >
+                          <FaEdit size={30} color="rgb(39 145 14)" />
+                          <span
+                            style={{
+                              fontSize: "10px",
+                              textDecoration: "none",
+                              color: "black",
                             }}
                           >
                             Editar
-                          </Button>
-                        </td>
-                        <td>
-                          <Button
-                            color="danger"
-                            onClick={() => {
-                              handleEliminarClick(curso);
+                          </span>
+                        </a>
+
+                        <a
+                          href="#"
+                          className="  me-2 d-flex flex-column align-items-center mt-2 mb-2"
+                          style={{ textDecoration: "none" }}
+                          title="Registrar"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleEliminarClick(curso);
+                          }}
+                        >
+                          <FaTrash size={30} color="#b12121c9" />
+                          <span
+                            style={{
+                              fontSize: "10px",
+                              textDecoration: "none",
+                              color: "black",
                             }}
                           >
                             Eliminar
-                          </Button>
-                        </td>
+                          </span>
+                        </a>
                       </td>
                     </tr>
                   ))}

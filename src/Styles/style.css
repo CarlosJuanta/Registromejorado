@@ -173,3 +173,9 @@ button {
     background: red !important;
   }
 }
+
+/* Agrega esto a tu App.css */
+.td-acciones {
+  height: 100%;
+  vertical-align: middle !important;
+}
