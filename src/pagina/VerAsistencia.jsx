@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
+import { FiUserCheck } from "react-icons/fi";
+import { FaFilePdf } from "react-icons/fa6";
+import { PiFilePlus } from "react-icons/pi";
 import API_URL from "../Configure";
 import logo from "../Imagenes/logoescuela.png"; // Importa la imagen
 import {
@@ -162,26 +165,68 @@ const Asistencia = () => {
 
   return (
     <>
-      <h4 className="p-4 text-center  fs-2 ">Asistencia</h4>
+      <div className="d-flex flex-column align-items-center mt-3 mb-3">
+        <span>
+          <FiUserCheck
+            size={50}
+            color="white"
+            style={{
+              filter: "blur(0.8px) drop-shadow(0 0 8px #fff)",
+            }}
+          />
+        </span>
+        <h5
+          className=" fw-bold mt-2 mb-0"
+          style={{
+            filter: "drop-shadow(0 0 0.7px #000)",
+          }}
+        >
+          Asistencia
+        </h5>
+      </div>
       <div>
         <div className="d-flex flex-column flex-md-row p-3 gap-4 justify-content-center align-items-center">
           <div>
             <NavLink to="/asistencia">
-              <Button color="warning">Registrar Nueva Asistencia</Button>
+              <Button
+                style={{
+                  backgroundColor: "rgb(55 153 76)",
+                  boxShadow: "0 1px 5px 0#6d5e5e", // Sombra
+                  filter: "blur(0.1px) drop-shadow(0 0 6px#b6594d)", // Un poco de blur y resplandor
+                }}
+              >
+                Nueva Asistencia <PiFilePlus size={30} />
+              </Button>
             </NavLink>
           </div>
-          <div>
-            <Button color="primary " onClick={generarReportePDF}>
-              Generar Reporte PDF
-            </Button>
-          </div>
         </div>
+        <hr
+          className="mb-3"
+          style={{
+            marginLeft: "90px",
+            marginRight: "90px",
+            border: "0",
+            height: "2px", // Más gruesa
+            background: "rgba(245, 237, 237, 0.9)", // Gris translúcido
+            filter: "blur(0.2px) drop-shadow(0 0 7px #fff)",
+            borderRadius: "4px",
+          }}
+        />
+        <h5
+          className=" fw-bold mt-2 mb-3 text-center"
+          style={{
+            filter: "drop-shadow(0 0 0.7px #000)",
+          }}
+        >
+          Historial Asistencias
+        </h5>
         <div className="d-flex flex-column flex-md-row pe-5 ps-5 gap-4 justify-content-center align-items-center">
           <Input
             type="date"
             placeholder="Fecha"
             value={selectedDate}
             onChange={(e) => setSelectedDate(e.target.value)}
+            style={{ width: "42%" }}
           />
 
           <Input
@@ -189,6 +234,7 @@ const Asistencia = () => {
             type="select"
             value={selectedGrado}
             onChange={(e) => setSelectedGrado(e.target.value)}
+            style={{ width: "42%" }}
           >
             <option value="">Seleccionar...</option>
             {grados.map((grado) => (
@@ -197,84 +243,108 @@ const Asistencia = () => {
               </option>
             ))}
           </Input>
+
+          <Button
+            style={{
+              backgroundColor: "rgb(36 101 147)",
+              boxShadow: "0 1px 2px 0#6d5e5e", // Sombra
+              filter: "blur(0.1px) drop-shadow(0 0 6px#b6594d)",
+            }} // Un poco de blur y resplandor}}
+            onClick={generarReportePDF}
+          >
+            Guardar {""}
+            <FaFilePdf size={25} />
+          </Button>
         </div>
       </div>
 
-      <div className="table-responsive p-5">
-        <table className="table table-light  border table-hover table-sm border rounded-2 shadow overflow-hidden align-middle font-monospace">
-          <thead className="table-dark table text-center align-middle">
-            <tr className="">
-              <th scope="col" style={{ width: "220px" }}>
-                CUI
-              </th>
-              <th scope="col">Nombre</th>
-              <th scope="col">Apellido</th>
-              <th scope="col">Grado</th>
-              <th scope="col">Asistencias</th>
-              <th scope="col">Total Asistencias</th>
-              <th scope="col">Porcentaje</th>
-              <th scope="col" style={{ width: "150px" }}>
-                Llamados de Atención
-              </th>
-            </tr>
-          </thead>
-          <tbody className="table text-center table-hover">
-            {estudiantes.map((estudiante) => {
-              const totalAsistencias = estudiante.asistencias.filter(
-                (asistencia) => asistencia.estado
-              ).length;
+      <div className="px-5 pt-4 mt-1" style={{}}>
+        <div
+          style={{
+            maxHeight: "70vh",
+            overflowY: "auto",
+            borderRadius: "1rem",
+          }}
+        >
+          <table
+            className="table table-light border table-hover table-sm rounded-2 shadow align-middle font-monospace"
+            style={{ borderRadius: "1rem" }}
+          >
+            <thead className="table-dark text-center fs-6 sticky-top">
+              <tr className="">
+                <th scope="col">No.</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Grado</th>
+                <th scope="col">Asistencias</th>
+                <th scope="col" style={{ width: "150px" }}>
+                  Total Asistencias
+                </th>
+                <th scope="col">Porcentaje</th>
+                <th scope="col" style={{ width: "150px" }}>
+                  Llamados de Atención
+                </th>
+              </tr>
+            </thead>
+            <tbody className="table text-center table-hover">
+              {estudiantes.map((estudiante, index) => {
+                const totalAsistencias = estudiante.asistencias.filter(
+                  (asistencia) => asistencia.estado
+                ).length;
 
-              return (
-                <tr key={estudiante._id}>
-                  <td>{estudiante.cuiEstudiante}</td>
-                  <td>{estudiante.nombreEstudiante}</td>
-                  <td>{estudiante.apellidoEstudiante}</td>
-                  <td>{estudiante.codigoGrado[0].nombreGrado}</td>
-                  <td>
-                    {selectedDate && (
-                      <>
-                        {
-                          estudiante.asistencias.filter(
-                            (asistencia) =>
-                              asistencia.fecha === selectedDate &&
-                              asistencia.estado
-                          ).length
-                        }
-                      </>
-                    )}
-                  </td>
-                  <td>{totalAsistencias}</td>
-                  <td style={{ color: "green" }}>
-                    {((totalAsistencias / 55) * 100).toFixed(2)}%
-                  </td>
-                  <td className="d-flex justify-content-center">
-                    <a
-                      href="#"
-                      className="  me-2 d-flex flex-column align-items-center mt-2 mb-2"
-                      style={{ textDecoration: "none" }}
-                      title="Ver"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        abrirModal(estudiante);
-                      }}
-                    >
-                      <FaEye size={30} color="rgb(36 101 147)" />
-                      <span
-                        style={{
-                          fontSize: "10px",
-                          textDecoration: "none",
-                          color: "black",
+                return (
+                  <tr key={estudiante._id}>
+                    <td>{index + 1}</td>
+
+                    <td>{estudiante.nombreEstudiante}</td>
+                    <td>{estudiante.apellidoEstudiante}</td>
+                    <td>{estudiante.codigoGrado[0].nombreGrado}</td>
+                    <td>
+                      {selectedDate && (
+                        <>
+                          {
+                            estudiante.asistencias.filter(
+                              (asistencia) =>
+                                asistencia.fecha === selectedDate &&
+                                asistencia.estado
+                            ).length
+                          }
+                        </>
+                      )}
+                    </td>
+                    <td>{totalAsistencias}</td>
+                    <td style={{ color: "green" }}>
+                      {((totalAsistencias / 55) * 100).toFixed(2)}%
+                    </td>
+                    <td className="d-flex justify-content-center">
+                      <a
+                        href="#"
+                        className="  me-2 d-flex flex-column align-items-center mt-2 mb-2"
+                        style={{ textDecoration: "none" }}
+                        title="Ver"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          abrirModal(estudiante);
                         }}
                       >
-                        Ver
-                      </span>
-                    </a>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+                        <FaEye size={30} color="rgb(36 101 147)" />
+                        <span
+                          style={{
+                            fontSize: "10px",
+                            textDecoration: "none",
+                            color: "black",
+                          }}
+                        >
+                          Ver
+                        </span>
+                      </a>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <Modal isOpen={modalOpen} toggle={() => setModalOpen(!modalOpen)}>

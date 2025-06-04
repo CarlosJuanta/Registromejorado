@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Contexto } from "../Context/ContextProvider";
-
+import { FaUserPlus } from "react-icons/fa6";
 import { FaEye } from "react-icons/fa";
 import { FaEdit } from "react-icons/fa";
 import { FaTrash } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
+import { PiStudent } from "react-icons/pi";
 import { FaPlus } from "react-icons/fa";
 import API_URL from "../Configure";
 import "../Styles/style.css";
@@ -282,7 +283,26 @@ const VerEstudiante = () => {
     if (usuario.rol === "admin") {
       return (
         <>
-          <h4 className="text-center pt-3 fw-bold">Estudiante</h4>
+          <div className="d-flex flex-column align-items-center mt-3 mb-3">
+            <span>
+              <PiStudent
+                size={55}
+                color="white"
+                style={{
+                  filter: "blur(0.8px) drop-shadow(0 0 8px #fff)",
+                }}
+              />
+            </span>
+            <h5
+              className=" fw-bold mt-2 mb-0"
+              style={{
+                filter: "drop-shadow(0 0 0.7px #000)",
+              }}
+            >
+              Estudiante
+            </h5>
+          </div>
+
           <div className="p-5">
             <Row className="mb-3">
               <Col md={8}>
@@ -310,15 +330,26 @@ const VerEstudiante = () => {
               </Col>
               <Col className="text-start text-md-end pt-md-0 pt-3">
                 <NavLink to="/estudiante">
-                  <Button color="success">Crear Estudiante</Button>
+                  <Button color="success">
+                    Crear Estudiante <FaUserPlus size={20} />
+                  </Button>
                 </NavLink>
               </Col>
             </Row>
           </div>
           <div className="px-5" style={{}}>
-            <div style={{ maxHeight: "75vh", overflowY: "auto" }}>
+            <div
+              style={{
+                maxHeight: "70vh",
+                overflowY: "auto",
+                borderRadius: "1rem",
+              }}
+            >
               {datos.length > 0 ? (
-                <table className="table table-light border table-hover table-sm rounded-2 shadow align-middle font-monospace">
+                <table
+                  className="table table-light border table-hover table-sm rounded-2 shadow align-middle font-monospace"
+                  style={{ borderRadius: "1rem" }}
+                >
                   <thead className="table-dark text-center fs-6 sticky-top">
                     <tr>
                       <th scope="col">No.</th>

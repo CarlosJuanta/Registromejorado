@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { FaEye } from "react-icons/fa";
 import { FaEdit } from "react-icons/fa";
+import { BsPencilSquare } from "react-icons/bs";
+
 import { Contexto } from "../Context/ContextProvider";
 import { Navigate, useNavigate } from "react-router-dom";
 import logo from "../Imagenes/logoescuela.png"; // Importa la imagen
@@ -292,7 +294,25 @@ const Asistencia = () => {
   } else if (usuario.rol === "admin" || usuario.rol === "docente") {
     return (
       <>
-        <h4 className="text-center pt-3 fw-bold ">Calificaciones</h4>
+        <div className="d-flex flex-column align-items-center mt-3 mb-3">
+          <span>
+            <BsPencilSquare
+              size={45}
+              color="white"
+              style={{
+                filter: "blur(0.8px) drop-shadow(0 0 8px #fff)",
+              }}
+            />
+          </span>
+          <h5
+            className=" fw-bold mt-2 mb-0"
+            style={{
+              filter: "drop-shadow(0 0 0.7px #000)",
+            }}
+          >
+            Calificaciones
+          </h5>
+        </div>
         <div className="col-12 p-5">
           <Row>
             <Col className="mt-4">

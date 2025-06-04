@@ -1,7 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
 import API_URL from "../Configure";
 import { Contexto } from "../Context/ContextProvider";
+import { FaEdit } from "react-icons/fa";
+import { LiaChalkboardTeacherSolid } from "react-icons/lia";
 import { FaSearch } from "react-icons/fa";
+
 import {
   Input,
   Col,
@@ -147,13 +150,31 @@ const VerDocente = () => {
     if (usuario.rol === "admin") {
       return (
         <>
-          <h4 className="fw-bold text-center pt-3">Docente</h4>
+          <div className="d-flex flex-column align-items-center mt-3 mb-3">
+            <span>
+              <LiaChalkboardTeacherSolid
+                size={55}
+                color="white"
+                style={{
+                  filter: "blur(0.8px) drop-shadow(0 0 8px #fff)",
+                }}
+              />
+            </span>
+            <h5
+              className=" fw-bold mt-2 mb-0"
+              style={{
+                filter: "drop-shadow(0 0 0.6px #000)",
+              }}
+            >
+              Docente
+            </h5>
+          </div>
           <div className="p-5">
             <Row className="mb-3">
               <Col md={8}>
                 <div className="input-group">
                   <Input
-                    placeholder="Buscar Docentepor Nombre"
+                    placeholder="Buscar Docente por Nombre"
                     type="text"
                     value={filtroNombre}
                     onChange={(e) => setFiltroNombre(e.target.value)}
@@ -175,70 +196,97 @@ const VerDocente = () => {
               </Col>
               <Col className="text-start text-md-end pt-md-0 pt-3">
                 <NavLink to="/docente">
-                  <Button color="success">Crear Docente</Button>
+                  <Button color="success">
+                    Crear Docente <FaIcons.FaUserTie size={20} />
+                  </Button>
                 </NavLink>
               </Col>
             </Row>
           </div>
-          <div className="table-responsive p-5">
-            {datos.length > 0 ? (
-              <>
-                <p className="negrita">
-                  Total de docentes registrados: {totalDocentes}
-                </p>
-                <table className="table table-hover  table-sm align-middle fs-6 ">
-                  {/* El contenido de la tabla se mostrará solo si hay datos */}
-                  <thead className="table-dark table text-center">
-                    <tr>
-                      <th scope="col">CUI</th>
-                      <th scope="col">Nombres</th>
-                      <th scope="col">Apellidos</th>
-                      <th scope="col">Teléfono</th>
-                      <th scope="col">Correo</th>
-                      <th scope="col">Dirección</th>
-                      <th scope="col">Nacionalidad</th>
-                      <th scope="col">Acciones</th>
-                    </tr>
-                  </thead>
-                  <tbody className="table text-center">
-                    {datos.map((docente) => (
-                      <tr key={docente.cuiDocente}>
-                        <td>{docente.cuiDocente}</td>
-                        <td>{docente.nombreDocente}</td>
-                        <td>{docente.apellidoDocente}</td>
-                        <td>{docente.telefonoDocente}</td>
-                        <td>{docente.correoDocente}</td>
-                        <td>{docente.direccionDocente}</td>
-                        <td>{docente.nacionalidadDocente}</td>
-                        <td>
-                          <td className="negrita">
-                            <Button
-                              color="warning"
-                              onClick={() => {
+          <div className="px-5 rounded-4" style={{}}>
+            <div
+              style={{
+                maxHeight: "75vh",
+                overflowY: "auto",
+                borderRadius: "1rem",
+              }}
+            >
+              {datos.length > 0 ? (
+                <>
+                  <table
+                    className="table table-light border table-hover table-sm rounded-2 shadow align-middle font-monospace"
+                    style={{ borderRadius: "1rem" }}
+                  >
+                    <thead className="table-dark text-center fs-6 sticky-top">
+                      <tr>
+                        <th scope="col">No.</th>
+                        <th scope="col">CUI</th>
+                        <th scope="col">Nombres</th>
+                        <th scope="col">Apellidos</th>
+                        <th scope="col">Teléfono</th>
+                        <th scope="col">Correo</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">Nacionalidad</th>
+                        <th scope="col">Acciones</th>
+                        <th scope="col">Estado</th>
+                      </tr>
+                    </thead>
+                    <tbody className="table text-center">
+                      {datos.map((docente) => (
+                        <tr key={docente.cuiDocente}>
+                          <td>{datos.indexOf(docente) + 1}</td>
+                          <td>{docente.cuiDocente}</td>
+                          <td>{docente.nombreDocente}</td>
+                          <td>{docente.apellidoDocente}</td>
+                          <td>{docente.telefonoDocente}</td>
+                          <td>
+                            <a href={`mailto:${docente.correoDocente}`}>
+                              {docente.correoDocente}
+                            </a>
+                          </td>
+                          <td>{docente.direccionDocente}</td>
+                          <td>{docente.nacionalidadDocente}</td>
+
+                          <td>
+                            <a
+                              href="#"
+                              className="  me-2 d-flex flex-column align-items-center mt-2 mb-2"
+                              style={{ textDecoration: "none" }}
+                              title="Editar"
+                              onClick={(e) => {
+                                e.preventDefault();
                                 handleVerClick(docente);
                               }}
                             >
-                              Editar
-                            </Button>
+                              <FaEdit size={30} color="rgb(39 145 14)" />
+                              <span
+                                style={{
+                                  fontSize: "10px",
+                                  textDecoration: "none",
+                                  color: "black",
+                                }}
+                              >
+                                Editar
+                              </span>
+                            </a>
                           </td>
-                          <td className="negrita">
+                          <td>
                             {docente.estadoDocente === false ? (
                               <span className="text-danger">Inactivo</span>
                             ) : (
                               <span className="text-success">Activo</span>
                             )}
                           </td>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </>
-            ) : (
-              <p>No se encontraron resultados.</p>
-            )}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </>
+              ) : (
+                <p>No se encontraron resultados.</p>
+              )}
+            </div>
           </div>
-
           <Modal isOpen={modal} toggle={toggleModal}>
             <ModalHeader toggle={toggleModal}>Detalles del Docente</ModalHeader>
             <ModalBody>

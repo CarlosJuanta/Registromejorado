@@ -3,6 +3,8 @@ import { FaEye } from "react-icons/fa";
 import { FaEdit } from "react-icons/fa";
 import { FaTrash } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
+import { LuBookOpenCheck } from "react-icons/lu";
+import { LuFilePlus2 } from "react-icons/lu";
 import { FaPlus } from "react-icons/fa";
 import { FaMousePointer } from "react-icons/fa";
 import { Contexto } from "../Context/ContextProvider";
@@ -222,7 +224,25 @@ const VerCurso = () => {
     if (usuario.rol === "admin") {
       return (
         <>
-          <h4 className="text-center fw-bold pt-3">Curso</h4>
+          <div className="d-flex flex-column align-items-center mt-3 mb-3">
+            <span>
+              <LuBookOpenCheck
+                size={55}
+                color="white"
+                style={{
+                  filter: "blur(0.8px) drop-shadow(0 0 8px #fff)",
+                }}
+              />
+            </span>
+            <h5
+              className=" fw-bold mt-2 mb-0"
+              style={{
+                filter: "drop-shadow(0 0 0.7px #000)",
+              }}
+            >
+              Curso
+            </h5>
+          </div>
           <div className="p-5">
             <Row className="mb-3">
               <Col md={8}>
@@ -250,108 +270,125 @@ const VerCurso = () => {
               </Col>
               <Col className="text-start text-md-end pt-md-0 pt-3">
                 <NavLink to="/crearcurso">
-                  <Button color="success">Crear Curso </Button>
+                  <Button color="success">
+                    Crear Curso <LuFilePlus2 size={25} />{" "}
+                  </Button>
                 </NavLink>
               </Col>
             </Row>
           </div>
-          <div className="table-responsive p-5">
-            {datos.length > 0 ? (
-              <table className="table table-light  border table-hover table-sm border rounded-2 shadow overflow-hidden align-middle font-monospace">
-                {/* El contenido de la tabla se mostrará solo si hay datos */}
-                <thead className="table-dark text-center algin-middle">
-                  <tr>
-                    <th scope="col">Código</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Descripción</th>
-                    <th scope="col" style={{ width: "150px" }}>
-                      Grado Asignado{" "}
-                    </th>
-                    <th scope="col">Acciones</th>
-                    <th scope="col"></th>
-                  </tr>
-                </thead>
-                <tbody className="table text-center">
-                  {datos.map((curso) => (
-                    <tr key={curso.codigoCurso} className="align-middle">
-                      <td>{curso.codigoCurso}</td>
-                      <td>{curso.nombreCurso}</td>
-                      <td>{curso.descripcionCurso}</td>
-                      <td>
-                        <a
-                          href="#"
-                          className="  me-2 d-flex flex-column align-items-center mt-2 mb-2"
-                          style={{ textDecoration: "none" }}
-                          title="Ver"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            handleVerClick(curso);
-                          }}
-                        >
-                          <FaEye size={30} color="rgb(36 101 147)" />
-                          <span
-                            style={{
-                              fontSize: "10px",
-                              textDecoration: "none",
-                              color: "black",
-                            }}
-                          >
-                            Ver
-                          </span>
-                        </a>
-                      </td>
-                      <td>
-                        <a
-                          href="#"
-                          className=" me-2 d-flex flex-column align-items-center mt-2 mb-2"
-                          style={{ textDecoration: "none" }}
-                          title="Editar"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            handleEditClick(curso);
-                          }}
-                        >
-                          <FaEdit size={30} color="rgb(39 145 14)" />
-                          <span
-                            style={{
-                              fontSize: "10px",
-                              textDecoration: "none",
-                              color: "black",
-                            }}
-                          >
-                            Editar
-                          </span>
-                        </a>
 
-                        <a
-                          href="#"
-                          className="  me-2 d-flex flex-column align-items-center mt-2 mb-2"
-                          style={{ textDecoration: "none" }}
-                          title="Registrar"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            handleEliminarClick(curso);
-                          }}
-                        >
-                          <FaTrash size={30} color="#b12121c9" />
-                          <span
-                            style={{
-                              fontSize: "10px",
-                              textDecoration: "none",
-                              color: "black",
+          <div className="px-5" style={{}}>
+            <div
+              style={{
+                maxHeight: "70vh",
+                overflowY: "auto",
+                borderRadius: "1rem",
+              }}
+            >
+              {datos.length > 0 ? (
+                <table
+                  className="table table-light border table-hover table-sm rounded-2 shadow align-middle font-monospace"
+                  style={{ borderRadius: "1rem" }}
+                >
+                  {/* El contenido de la tabla se mostrará solo si hay datos */}
+                  <thead className="table-dark text-center fs-6 sticky-top">
+                    <tr>
+                      <th scope="col">No.</th>
+                      <th scope="col">Código</th>
+                      <th scope="col">Nombre</th>
+                      <th scope="col">Descripción</th>
+                      <th scope="col" style={{ width: "150px" }}>
+                        Grado Asignado{" "}
+                      </th>
+                      <th scope="col">Acciones</th>
+                      <th scope="col"></th>
+                    </tr>
+                  </thead>
+                  <tbody className="table text-center">
+                    {datos.map((curso) => (
+                      <tr key={curso.codigoCurso} className="align-middle">
+                        <td>{datos.indexOf(curso) + 1}</td>
+                        <td>{curso.codigoCurso}</td>
+                        <td>{curso.nombreCurso}</td>
+                        <td>{curso.descripcionCurso}</td>
+                        <td>
+                          <a
+                            href="#"
+                            className="  me-2 d-flex flex-column align-items-center mt-2 mb-2"
+                            style={{ textDecoration: "none" }}
+                            title="Ver"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleVerClick(curso);
                             }}
                           >
-                            Eliminar
-                          </span>
-                        </a>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            ) : (
-              <p>No se encontraron resultados.</p>
-            )}
+                            <FaEye size={30} color="rgb(36 101 147)" />
+                            <span
+                              style={{
+                                fontSize: "10px",
+                                textDecoration: "none",
+                                color: "black",
+                              }}
+                            >
+                              Ver
+                            </span>
+                          </a>
+                        </td>
+                        <td>
+                          <a
+                            href="#"
+                            className=" me-2 d-flex flex-column align-items-center mt-2 mb-2"
+                            style={{ textDecoration: "none" }}
+                            title="Editar"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleEditClick(curso);
+                            }}
+                          >
+                            <FaEdit size={30} color="rgb(39 145 14)" />
+                            <span
+                              style={{
+                                fontSize: "10px",
+                                textDecoration: "none",
+                                color: "black",
+                              }}
+                            >
+                              Editar
+                            </span>
+                          </a>
+                        </td>
+                        <td>
+                          <a
+                            href="#"
+                            className="  me-2 d-flex flex-column align-items-center mt-2 mb-2"
+                            style={{ textDecoration: "none" }}
+                            title="Registrar"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleEliminarClick(curso);
+                            }}
+                          >
+                            <FaTrash size={30} color="#b12121c9" />
+                            <span
+                              style={{
+                                fontSize: "10px",
+                                textDecoration: "none",
+                                color: "black",
+                              }}
+                            >
+                              Eliminar
+                            </span>
+                          </a>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              ) : (
+                <p>No se encontraron resultados.</p>
+              )}
+            </div>
           </div>
 
           <Modal isOpen={thirdModal} toggle={toggleThirdModal}>

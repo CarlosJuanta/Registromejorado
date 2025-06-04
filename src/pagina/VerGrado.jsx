@@ -1,6 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import API_URL from "../Configure";
 import { FaSearch } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa";
+import { FaEdit } from "react-icons/fa";
+import { BsFillClipboard2PlusFill } from "react-icons/bs";
+import { SiGoogleclassroom } from "react-icons/si";
 import { Contexto } from "../Context/ContextProvider";
 
 import {
@@ -233,7 +239,25 @@ const VerGrado = () => {
     if (usuario.rol === "admin") {
       return (
         <>
-          <h4 className="text-center pw-bold pt-3">Grado</h4>
+          <div className="d-flex flex-column align-items-center mt-3 mb-3">
+            <span>
+              <SiGoogleclassroom
+                size={55}
+                color="white"
+                style={{
+                  filter: "blur(0.8px) drop-shadow(0 0 8px #fff)",
+                }}
+              />
+            </span>
+            <h5
+              className=" fw-bold mt-2 mb-0"
+              style={{
+                filter: "drop-shadow(0 0 0.7px #000)",
+              }}
+            >
+              Grado
+            </h5>
+          </div>
           <div className="p-5">
             <Row className="mb-3">
               <Col md={8}>
@@ -261,97 +285,152 @@ const VerGrado = () => {
               </Col>
               <Col className="text-start text-md-end pt-md-0 pt-3">
                 <NavLink to="/grado">
-                  <Button color="success">Crear Grado</Button>
+                  <Button color="success">
+                    Crear Grado <FaPlus size={15} />
+                  </Button>
                 </NavLink>
               </Col>
             </Row>
           </div>
-          <div className="table-responsive p-5">
-            {datos.length > 0 ? (
-              <table className="table table-hover table-light table-sm align-middle table-striped">
-                <thead className="table-dark table text-center">
-                  <tr>
-                    <th scope="col">Código</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Descripción</th>
-                    <th scope="col">Sección</th>
-                    <th scope="col">Docentes Asignado</th>
-                    <th scope="col">Asignaciones Docentes</th>
-                    <th scope="col">Acciones</th>
-                  </tr>
-                </thead>
-                <tbody className="table text-center">
-                  {datos.map((grado) => (
-                    <tr key={grado.codigoGrado}>
-                      <td className="negrita">{grado.codigoGrado}</td>
-                      <td className="negrita">{grado.nombreGrado}</td>
-                      <td className="negrita">{grado.descripcionGrado}</td>
-                      <td className="negrita">{grado.seccionGrado}</td>
-                      <td>
-                        {grado.cuiDocente.length > 0 ? (
-                          <Button
-                            color="success"
-                            onClick={() => {
+          <div className="px-5" style={{}}>
+            <div
+              style={{
+                maxHeight: "70vh",
+                overflowY: "auto",
+                borderRadius: "1rem",
+              }}
+            >
+              {datos.length > 0 ? (
+                <table
+                  className="table table-light border table-hover table-sm rounded-2 shadow align-middle font-monospace"
+                  style={{ borderRadius: "1rem" }}
+                >
+                  <thead className="table-dark text-center fs-6 sticky-top">
+                    <tr>
+                      <th scope="col">No.</th>
+                      <th scope="col">Código</th>
+                      <th scope="col">Nombre</th>
+                      <th scope="col">Descripción</th>
+                      <th scope="col" style={{ width: "50px" }}>
+                        Sección
+                      </th>
+                      <th scope="col">Docentes Asignado</th>
+                      <th scope="col" style={{ width: "100px" }}>
+                        Asignaciones Docentes
+                      </th>
+                      <th scope="col">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody className="table text-center">
+                    {datos.map((grado) => (
+                      <tr key={grado.codigoGrado}>
+                        <td>{datos.indexOf(grado) + 1}</td>
+                        <td>{grado.codigoGrado}</td>
+                        <td>{grado.nombreGrado}</td>
+                        <td>{grado.descripcionGrado}</td>
+                        <td>{grado.seccionGrado}</td>
+                        <td>
+                          <a
+                            href="#"
+                            className="  me-2 d-flex flex-column align-items-center mt-2 mb-2"
+                            style={{ textDecoration: "none" }}
+                            title="Ver"
+                            onClick={(e) => {
+                              e.preventDefault();
                               handleVerClick(grado);
                             }}
                           >
-                            Ver
-                          </Button>
-                        ) : (
-                          "No asignado"
-                        )}
-                      </td>
-                      <td>
+                            <FaEye size={30} color="rgb(36 101 147)" />
+                            <span
+                              style={{
+                                fontSize: "10px",
+                                textDecoration: "none",
+                                color: "black",
+                              }}
+                            >
+                              Ver
+                            </span>
+                          </a>
+                        </td>
                         <td>
-                          {grado.cuiDocente.length > 0 ? (
-                            <Button
-                              color="warning"
-                              onClick={() => {
+                          <td>
+                            <a
+                              href="#"
+                              className="  me-2 d-flex flex-column align-items-center mt-2 mb-2"
+                              style={{ textDecoration: "none" }}
+                              title="Asignar"
+                              onClick={(e) => {
+                                e.preventDefault();
                                 handleAsignarClick(grado);
                               }}
                             >
-                              Asignar
-                            </Button>
-                          ) : (
-                            "No asignado"
-                          )}
-                        </td>
-                        <td>
-                          {grado.cuiDocente.length > 0 ? (
-                            <Button
-                              color="danger"
-                              onClick={() => {
+                              <FaPlus size={30} color="rgb(77 161 169)" />
+                              <span
+                                style={{
+                                  fontSize: "10px",
+                                  textDecoration: "none",
+                                  color: "black",
+                                }}
+                              >
+                                Asignar
+                              </span>
+                            </a>
+                          </td>
+                          <td>
+                            <a
+                              href="#"
+                              className="  me-2 d-flex flex-column align-items-center mt-2 mb-2"
+                              style={{ textDecoration: "none" }}
+                              title="Eliminar"
+                              onClick={(e) => {
+                                e.preventDefault();
                                 handleEliminarClick(grado);
                               }}
                             >
-                              Eliminar
-                            </Button>
-                          ) : (
-                            "No asignado"
-                          )}
+                              <FaTrash size={30} color="#b12121c9" />
+                              <span
+                                style={{
+                                  fontSize: "10px",
+                                  textDecoration: "none",
+                                  color: "black",
+                                }}
+                              >
+                                Eliminar
+                              </span>
+                            </a>
+                          </td>
                         </td>
-                      </td>
-                      <td>
-                        {grado.cuiDocente.length > 0 ? (
-                          <Button
-                            color="success"
-                            onClick={() => {
+                        <td>
+                          <a
+                            href="#"
+                            className="  me-2 d-flex flex-column align-items-center mt-2 mb-2"
+                            style={{ textDecoration: "none" }}
+                            title="Editar"
+                            onClick={(e) => {
+                              e.preventDefault();
                               handleEditClick(grado);
                             }}
                           >
-                            Editar
-                          </Button>
-                        ) : (
-                          "No asignado"
-                        )}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            ) : (
-              <p>No se encontraron resultados.</p>
-            )}
+                            <FaEdit size={30} color="rgb(39 145 14)" />
+                            <span
+                              style={{
+                                fontSize: "10px",
+                                textDecoration: "none",
+                                color: "black",
+                              }}
+                            >
+                              Editar
+                            </span>
+                          </a>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              ) : (
+                <p>No se encontraron resultados.</p>
+              )}
+            </div>
           </div>
 
           <Modal isOpen={modal} toggle={toggleModal}>
