@@ -38,6 +38,10 @@ const Asistencia = () => {
 
   const [loadingCursos, setLoadingCursos] = useState(false); // Estado para indicar la carga de cursos
 
+  const gradoSeleccionado = grados.find(
+    (grado) => grado.codigoGrado === selectedGrado
+  );
+
   // Función para generar un PDF de las calificaciones del estudiante seleccionado
   const generarPDFCalificaciones = () => {
     if (selectedEstudiante) {
@@ -313,14 +317,15 @@ const Asistencia = () => {
             Calificaciones
           </h5>
         </div>
-        <div className="col-12 p-5">
-          <Row>
-            <Col className="mt-4">
+        <div>
+          <Row className="mb-3 m-5">
+            <Col lg={8} className=" me-5">
               <Input
                 placeholder="Seleccionar Grado"
                 type="select"
                 value={selectedGrado}
                 onChange={(e) => setSelectedGrado(e.target.value)}
+                className="w-100"
               >
                 <option value="">Seleccionar...</option>
                 {grados.map((grado) => (
@@ -330,76 +335,98 @@ const Asistencia = () => {
                 ))}
               </Input>
             </Col>
+            <Col className="text-center text-lg-center pt-lg-2 pt-3">
+              <h5
+                className="fw-bold"
+                style={{ filter: "drop-shadow(0 0 0.7px #000)" }}
+              >
+                Docente:{" "}
+                {gradoSeleccionado?.cuiDocente &&
+                  `${gradoSeleccionado.cuiDocente[0]?.nombreDocente || ""} ${
+                    gradoSeleccionado.cuiDocente[0]?.apellidoDocente || ""
+                  }`}
+              </h5>
+            </Col>
           </Row>
         </div>
-        <div className=" table table-responsive p-5">
-          <table className="table table-light  border table-hover table-sm border rounded-2 shadow overflow-hidden align-middle font-monospace">
-            <thead className="table-dark text-center p-3 align-middle">
-              <tr>
-                <th scope="col">CUI</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Apellido</th>
-                <th scope="col">Grado</th>
-                <th scope="col" style={{ width: "150px" }}>
-                  Acciones
-                </th>
-              </tr>
-            </thead>
-            <tbody className="text-center ">
-              {estudiantes.map((estudiante, index) => (
-                <tr key={estudiante._id}>
-                  <td>{estudiante.cuiEstudiante}</td>
-                  <td>{estudiante.nombreEstudiante}</td>
-                  <td>{estudiante.apellidoEstudiante}</td>
-                  <td>{estudiante.codigoGrado[0].nombreGrado}</td>
-                  <td className="d-flex p-2 justify-content-center">
-                    <a
-                      href="#"
-                      className="  me-2 d-flex flex-column align-items-center mt-2 mb-2 me-3"
-                      style={{ textDecoration: "none" }}
-                      title="Ver"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        abrirModal(estudiante);
-                      }}
-                    >
-                      <FaEye size={30} color="rgb(36 101 147)" />
-                      <span
-                        style={{
-                          fontSize: "10px",
-                          textDecoration: "none",
-                          color: "black",
-                        }}
-                      >
-                        Ver
-                      </span>
-                    </a>
-                    <a
-                      href="#"
-                      className=" d-flex flex-column align-items-center mt-2 me-2 mb-2"
-                      style={{ textDecoration: "none" }}
-                      title="Registrar"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        abrirModalRegistrarNotas(estudiante);
-                      }}
-                    >
-                      <FaEdit size={30} color="rgb(39 145 14)" />
-                      <span
-                        style={{
-                          fontSize: "10px",
-                          textDecoration: "none",
-                          color: "black",
-                        }}
-                      >
-                        Registrar
-                      </span>
-                    </a>
-                  </td>
+        <div className="px-5 rounded-4" style={{}}>
+          <div
+            style={{
+              maxHeight: "75vh",
+              overflowY: "auto",
+              borderRadius: "1rem",
+            }}
+          >
+            <table className="table table-light  border table-hover table-sm border rounded-2 shadow overflow-hidden align-middle font-monospace">
+              <thead className="table-dark text-center fs-6 sticky-top">
+                <tr>
+                  <th scope="col">No.</th>
+                  <th scope="col">CUI</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Apellido</th>
+                  <th scope="col">Grado</th>
+                  <th scope="col" style={{ width: "300px" }}>
+                    Acciones
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="text-center ">
+                {estudiantes.map((estudiante, index) => (
+                  <tr key={estudiante._id}>
+                    <td>{index + 1}</td>
+                    <td>{estudiante.cuiEstudiante}</td>
+                    <td>{estudiante.nombreEstudiante}</td>
+                    <td>{estudiante.apellidoEstudiante}</td>
+                    <td>{estudiante.codigoGrado[0].nombreGrado}</td>
+                    <td className="d-flex p-2 justify-content-evenly">
+                      <a
+                        href="#"
+                        className="  me-2 d-flex flex-column align-items-center mt-2 mb-2 me-3"
+                        style={{ textDecoration: "none" }}
+                        title="Ver"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          abrirModal(estudiante);
+                        }}
+                      >
+                        <FaEye size={30} color="rgb(36 101 147)" />
+                        <span
+                          style={{
+                            fontSize: "10px",
+                            textDecoration: "none",
+                            color: "black",
+                          }}
+                        >
+                          Ver
+                        </span>
+                      </a>
+                      <a
+                        href="#"
+                        className=" d-flex flex-column align-items-center mt-2 me-2 mb-2"
+                        style={{ textDecoration: "none" }}
+                        title="Registrar"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          abrirModalRegistrarNotas(estudiante);
+                        }}
+                      >
+                        <FaEdit size={30} color="rgb(39 145 14)" />
+                        <span
+                          style={{
+                            fontSize: "10px",
+                            textDecoration: "none",
+                            color: "black",
+                          }}
+                        >
+                          Registrar
+                        </span>
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
         <Modal
           isOpen={modalOpen}

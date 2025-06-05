@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 import * as FaIcons from "react-icons/fa";
+import { FaRegFilePdf } from "react-icons/fa"; // Importa el icono de PDF
+import { PiFilePlus } from "react-icons/pi"; // Importa el icono de añadir archivo
+import { FiUserCheck } from "react-icons/fi"; // Importa el icono de usuario
+import { FaRegSave } from "react-icons/fa";
 import logo from "../Imagenes/logoescuela.png"; // Importa la imagen
 import API_URL from "../Configure";
 import {
@@ -276,51 +280,88 @@ const Asistencia = () => {
 
   return (
     <>
-      <h4>Asistencia</h4>
+      <div className="d-flex flex-column align-items-center mt-3 mb-3">
+        <span>
+          <FiUserCheck
+            size={50}
+            color="white"
+            style={{
+              filter: "blur(0.8px) drop-shadow(0 0 8px #fff)",
+            }}
+          />
+        </span>
+        <h5
+          className=" fw-bold mt-2 mb-0"
+          style={{
+            filter: "drop-shadow(0 0 0.7px #000)",
+          }}
+        >
+          Nuevo Registro Asistencia
+        </h5>
+      </div>
+      <div className="d-flex flex-column flex-md-row p-3 gap-4 justify-content-center align-items-center">
+        <div>
+          <Button
+            onClick={guardarAsistencias}
+            style={{
+              backgroundColor: "rgb(55 153 76)",
+              boxShadow: "0 1px 5px 0#6d5e5e", // Sombra
+            }}
+          >
+            Guardar Asistencia <FaRegSave size={25} />
+          </Button>
+        </div>
+      </div>
 
-      <div className="p-5">
-        <Row>
-          <Col>
-            <Button color="success" onClick={guardarAsistencias}>
-              Guardar Asistencia
-            </Button>
-            <Button
-              color="primary"
-              onClick={generarPDF}
-              style={{ marginLeft: "10px" }}
-            >
-              Generar PDF
-            </Button>
-          </Col>
-        </Row>
+      <hr
+        className="mb-3"
+        style={{
+          marginLeft: "90px",
+          marginRight: "90px",
+          border: "0",
+          height: "2px", // Más gruesa
+          background: "rgba(245, 237, 237, 0.9)", // Gris translúcido
+          filter: "blur(0.2px) drop-shadow(0 0 7px #fff)",
+          borderRadius: "4px",
+        }}
+      />
 
-        <div style={{ marginTop: "20px" }}></div>
+      <div className="d-flex flex-column flex-md-row pe-5 ps-5 pb-4 gap-4 justify-content-center align-items-center">
+        <Input
+          type="date"
+          placeholder="Fecha"
+          value={obtenerFechaSistema()}
+          readOnly
+          className="w-100"
+        />
 
-        <Row>
-          <Col>
-            <Input
-              type="date"
-              placeholder="Fecha"
-              value={obtenerFechaSistema()}
-              readOnly
-            />
-          </Col>
-          <Col className="text-end">
-            <Input
-              placeholder="Seleccionar Grado"
-              type="select"
-              value={selectedGrado}
-              onChange={(e) => setSelectedGrado(e.target.value)}
-            >
-              <option value="">Seleccione un Grado</option>
-              {grados.map((grado) => (
-                <option key={grado._id} value={grado.codigoGrado}>
-                  {grado.nombreGrado} {grado.seccionGrado}
-                </option>
-              ))}
-            </Input>
-          </Col>
-        </Row>
+        <Input
+          placeholder="Seleccionar Grado"
+          type="select"
+          value={selectedGrado}
+          onChange={(e) => setSelectedGrado(e.target.value)}
+          className="w-100"
+        >
+          <option value="">Seleccione un Grado</option>
+          {grados.map((grado) => (
+            <option key={grado._id} value={grado.codigoGrado}>
+              {grado.nombreGrado} {grado.seccionGrado}
+            </option>
+          ))}
+        </Input>
+
+        <Button
+          style={{
+            backgroundColor: "rgb(36 101 147)",
+            boxShadow: "0 1px 2px 0#6d5e5e", // Sombra
+            filter: "blur(0.1px) drop-shadow(0 0 6px#b6594d)",
+          }} // Un poco de blur y resplandor}}
+          onClick={generarPDF}
+          className="w-100"
+        >
+          Guardar PDF {""}
+          <FaRegFilePdf size={25} />
+        </Button>
       </div>
 
       {registroExitoso && (
@@ -329,55 +370,79 @@ const Asistencia = () => {
         </div>
       )}
 
-      <div className="table-responsive p-4">
-        <table className="table table-light table-sm align-middle">
-          <thead className="table-dark table text-center">
-            <tr>
-              <th scope="col">CUI</th>
-              <th scope="col">Nombre</th>
-              <th scope="col">Apellido</th>
-              <th scope="col">Grado</th>
-              <th scope="col">Asistencia</th>
-              <th scope="col">Reporte</th>
-            </tr>
-          </thead>
-          <tbody className="table text-center ">
-            {estudiantes.map((estudiante) => (
-              <tr key={estudiante._id}>
-                <td>{estudiante.cuiEstudiante}</td>
-                <td>{estudiante.nombreEstudiante}</td>
-                <td>{estudiante.apellidoEstudiante}</td>
-                <td>{estudiante.codigoGrado[0].nombreGrado}</td>
-                <td>
-                  <input
-                    type="checkbox"
-                    checked={asistencias.some(
-                      (asistencia) =>
-                        asistencia.estudiante === estudiante._id &&
-                        asistencia.estado
-                    )}
-                    onChange={(e) =>
-                      handleAsistenciaChange(estudiante._id, e.target.checked)
-                    }
-                  />
-                </td>
-                <td>
+      <div className="px-5 rounded-4" style={{}}>
+        <div
+          style={{
+            maxHeight: "75vh",
+            overflowY: "auto",
+            borderRadius: "1rem",
+          }}
+        >
+          <table
+            className="table table-light border table-hover table-sm rounded-2 shadow align-middle font-monospace"
+            style={{ borderRadius: "1rem" }}
+          >
+            <thead className="table-dark table text-center shadow sticky-top">
+              <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Grado</th>
+                <th scope="col">Asistencia</th>
+                <th scope="col " style={{ width: "200px" }}>
+                  Reporte
+                </th>
+              </tr>
+            </thead>
+            <tbody className="table text-center ">
+              {estudiantes.map((estudiante) => (
+                <tr key={estudiante._id}>
+                  <td>{estudiantes.indexOf(estudiante) + 1}</td>
+
+                  <td>{estudiante.nombreEstudiante}</td>
+                  <td>{estudiante.apellidoEstudiante}</td>
+                  <td>{estudiante.codigoGrado[0].nombreGrado}</td>
                   <td>
-                    <Button
-                      color="warning"
-                      onClick={() => {
-                        toggleModal(estudiante._id); // Abre el modal para registrar falta
+                    <input
+                      type="checkbox"
+                      checked={asistencias.some(
+                        (asistencia) =>
+                          asistencia.estudiante === estudiante._id &&
+                          asistencia.estado
+                      )}
+                      onChange={(e) =>
+                        handleAsistenciaChange(estudiante._id, e.target.checked)
+                      }
+                    />
+                  </td>
+                  <td>
+                    <a
+                      href="#"
+                      className="  me-2 d-flex flex-column align-items-center mt-2 mb-2"
+                      style={{ textDecoration: "none" }}
+                      title="Ver"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        toggleModal(estudiante._id);
                       }}
                     >
-                      <FaIcons.FaPenAlt className="me-2" />
-                      Registrar
-                    </Button>
+                      <FaIcons.FaPenAlt size={25} color="#bd1d1d" />
+                      <span
+                        style={{
+                          fontSize: "10px",
+                          textDecoration: "none",
+                          color: "black",
+                        }}
+                      >
+                        Reportar Falta
+                      </span>
+                    </a>
                   </td>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {/* Modal para registrar falta */}
